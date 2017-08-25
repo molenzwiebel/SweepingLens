@@ -8,6 +8,7 @@ import LeagueTwitterProvider from "./providers/league-twitter-provider";
 import LoLEsportsTwitterProvider from "./providers/lolesports-twitter-provider";
 import EngineeringBlogProvider from "./providers/engineering-blog-provider";
 import LeagueSoundcloudProvider from "./providers/league-soundcloud-provider";
+import LeagueInstagramProvider from "./providers/league-instagram-provider";
 
 process.on("unhandledRejection", (err: Error) => {
     console.error("Unhandled rejection: ", err);
@@ -23,4 +24,5 @@ lens.registerProvider(LeagueTwitterProvider);
 lens.registerProvider(LoLEsportsTwitterProvider);
 lens.registerProvider(EngineeringBlogProvider);
 lens.registerProvider(LeagueSoundcloudProvider);
+lens.registerProvider(LeagueInstagramProvider);
 lens.startup(8888);
