@@ -21,7 +21,6 @@ export default class SweepingLens {
         Basie.sqlite(new Database("./data/sweeping_lens.db"));
 
         this.wss.on("connection", socket => {
-            console.log("got connection");
             this.peers.push(socket);
 
             socket.on("close", () => {
@@ -29,6 +28,7 @@ export default class SweepingLens {
             });
         });
 
+        this.app.get("/providers", (req, res) => this.loadProviders(req, res));
         this.app.get("/events", (req, res) => this.loadEvents(req, res));
     }
 
@@ -59,6 +59,18 @@ export default class SweepingLens {
         this.server.listen(port);
         console.log(`[+] Running at 0.0.0.0:${port}... ^C to exit.`);
     }
+
+    /**
+     * Handles the GET /providers path that loads all providers.
+     */
+    private loadProviders = async (req: express.Request, res: express.Response) => {
+        res.json(this.providerContexts.map(({ provider }) => ({
+            id: provider.slug,
+            name: provider.name,
+            description: provider.description,
+            icon: provider.icon
+        })));
+    };
 
     /**
      * Handles the GET /events path that loads all events.

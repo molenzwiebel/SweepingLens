@@ -8,7 +8,7 @@ import SweepingLens from "./lens";
 export default class ProviderContext<T> {
     public readonly data: T;
 
-    constructor(private lens: SweepingLens, private provider: Provider<T>) {
+    constructor(private lens: SweepingLens, public readonly provider: Provider<T>) {
         const dataFile = `./data/providers/${provider.slug}.json`;
         if (!fs.existsSync(dataFile)) fs.writeFileSync(dataFile, "{}");
 
