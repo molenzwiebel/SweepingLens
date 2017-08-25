@@ -49,7 +49,7 @@ class _DatabaseEvent extends BaseModel {
      */
     public serialize(): any {
         return {
-            id: this.id + "_" + this.provider_id,
+            id: this.id,
             provider: this.provider,
             title: this.title,
             url: this.url,

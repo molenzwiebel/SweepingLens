@@ -5,8 +5,9 @@ const provider: Provider<{}> = {
     name: "Test Provider",
     description: "A provider that generates event every few seconds.",
     icon: "https://www.macro4.com/files/6914/5406/7359/macro4-icon-test-data-oe.png",
-    constructor(ctx) {
+    async constructor(ctx) {
         let i = 0;
+        while (await ctx.hasEvent("" + (i++)));
 
         setInterval(() => {
             ctx.log("Generating event");

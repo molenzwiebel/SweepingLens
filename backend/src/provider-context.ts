@@ -3,11 +3,12 @@ import { Provider } from "./provider";
 import fileBackedObject from "./util/file-backed-object";
 import { Event } from "./event";
 import { DatabaseEvent } from "./database";
+import SweepingLens from "./lens";
 
 export default class ProviderContext<T> {
     public readonly data: T;
 
-    constructor(private provider: Provider<T>) {
+    constructor(private lens: SweepingLens, private provider: Provider<T>) {
         const dataFile = `./data/providers/${provider.slug}.json`;
         if (!fs.existsSync(dataFile)) fs.writeFileSync(dataFile, "{}");
 
@@ -25,7 +26,7 @@ export default class ProviderContext<T> {
      * Acts as console.dir but prepends the current provider.
      */
     public dir(arg: any) {
-        console.log(`[${this.provider.slug}]: Dir Object:`);
+        console.log(`[${this.provider.slug}]:  <object>`);
         console.dir(arg);
     }
 
@@ -38,6 +39,11 @@ export default class ProviderContext<T> {
 
         const dbEntry = DatabaseEvent.fromEvent(this.provider, event);
         await dbEntry.save();
+
+        this.lens.broadcast({
+            type: "event",
+            data: dbEntry.serialize()
+        });
     }
 
     /**

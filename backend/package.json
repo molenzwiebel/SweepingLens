@@ -15,12 +15,16 @@
   "author": "Thijs Molendijk (molenzwiebel)",
   "license": "MIT",
   "devDependencies": {
+    "@types/express": "^4.0.37",
     "@types/node": "^8.0.25",
     "@types/sqlite3": "^3.1.1",
+    "@types/uws": "^0.13.0",
     "typescript": "^2.4.2"
   },
   "dependencies": {
     "basie": "^2.0.0",
-    "sqlite3": "^3.1.9"
+    "express": "^4.15.4",
+    "sqlite3": "^3.1.9",
+    "uws": "^8.14.1"
   }
 }
