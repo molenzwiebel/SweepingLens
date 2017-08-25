@@ -1,6 +1,6 @@
 import SweepingLens from "./lens";
-import TestProvider from "./providers/test-provider";
+import RedditRiotCommentProvider from "./providers/reddit-riot-comment-provider";
 
 const lens = new SweepingLens();
-lens.registerProvider(TestProvider);
+lens.registerProvider(RedditRiotCommentProvider);
 lens.startup(8888);
