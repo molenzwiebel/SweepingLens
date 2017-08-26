@@ -16,7 +16,7 @@ const BoardsRiotPostProvider: Provider<{}> = {
     description: "Tracks all posts made by Rioters across all English boards.",
     icon: "https://i.imgur.com/aC7plOV.png",
     async constructor(ctx) {
-        const buildLoader = (region: string) => async () => {
+        const updateRegion = async (region: string) => {
             const entries = await loadRedTracker(region);
 
             for (const article of entries) {
@@ -41,13 +41,7 @@ const BoardsRiotPostProvider: Provider<{}> = {
         };
 
         // Distribute regions over our update time so we don't suddenly burst with updates.
-        let offset = 0;
-        for (const region of REGIONS) {
-            setTimeout(() => {
-                ctx.setInterval(buildLoader(region), UPDATE_TIME);
-            }, offset);
-            offset += UPDATE_TIME / REGIONS.length;
-        }
+        ctx.setDistributedInterval(REGIONS, updateRegion, UPDATE_TIME);
     }
 };
 export default BoardsRiotPostProvider;

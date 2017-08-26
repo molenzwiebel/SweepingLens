@@ -11,22 +11,24 @@ import LeagueSoundcloudProvider from "./providers/league-soundcloud-provider";
 import LeagueInstagramProvider from "./providers/league-instagram-provider";
 import BoardsRiotCommentProvider from "./providers/boards-riot-comment-provider";
 import BoardsRiotPostProvider from "./providers/boards-riot-post-provider";
+import LeagueYoutubeProvider from "./providers/league-youtube-provider";
 
 process.on("unhandledRejection", (err: Error) => {
     console.error("Unhandled rejection: ", err);
 });
 
 const lens = new SweepingLens();
-lens.registerProvider(RedditRiotCommentProvider);
-lens.registerProvider(LeagueOfLegendsWebsiteProvider);
-lens.registerProvider(NexusWebsiteProvider);
-lens.registerProvider(UniverseWebsiteProvider);
-lens.registerProvider(LoLEsportsWebsiteProvider);
-lens.registerProvider(LeagueTwitterProvider);
-lens.registerProvider(LoLEsportsTwitterProvider);
-lens.registerProvider(EngineeringBlogProvider);
-lens.registerProvider(LeagueSoundcloudProvider);
-lens.registerProvider(LeagueInstagramProvider);
-lens.registerProvider(BoardsRiotCommentProvider);
-lens.registerProvider(BoardsRiotPostProvider);
+// lens.registerProvider(RedditRiotCommentProvider);
+// lens.registerProvider(LeagueOfLegendsWebsiteProvider);
+// lens.registerProvider(NexusWebsiteProvider);
+// lens.registerProvider(UniverseWebsiteProvider);
+// lens.registerProvider(LoLEsportsWebsiteProvider);
+// lens.registerProvider(LeagueTwitterProvider);
+// lens.registerProvider(LoLEsportsTwitterProvider);
+// lens.registerProvider(EngineeringBlogProvider);
+// lens.registerProvider(LeagueSoundcloudProvider);
+// lens.registerProvider(LeagueInstagramProvider);
+// lens.registerProvider(BoardsRiotCommentProvider);
+// lens.registerProvider(BoardsRiotPostProvider);
+lens.registerProvider(LeagueYoutubeProvider);
 lens.startup(8888);

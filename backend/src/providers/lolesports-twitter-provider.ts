@@ -13,7 +13,7 @@ const LoLEsportsTwitterProvider: Provider<{}> = {
     description: "Tracks all tweets by official LoLEsports Twitter accounts.",
     icon: "https://cdn1.iconfinder.com/data/icons/logotypes/32/twitter-128.png",
     async constructor(ctx) {
-        const buildLoader = (account: string) => async () => {
+        const updateAccount = async (account: string) => {
             const data = await parse(`https://twitrss.me/twitter_user_to_rss/?user=${account}`);
 
             for (const entry of data.entries) {
@@ -34,13 +34,7 @@ const LoLEsportsTwitterProvider: Provider<{}> = {
             }
         };
 
-        let offset = 0;
-        for (const account of ACCOUNTS) {
-            setTimeout(() => {
-                ctx.setInterval(buildLoader(account), UPDATE_TIME);
-            }, offset);
-            offset += UPDATE_TIME / ACCOUNTS.length;
-        }
+        ctx.setDistributedInterval(ACCOUNTS, updateAccount, UPDATE_TIME);
     }
 };
 export default LoLEsportsTwitterProvider;

@@ -20,14 +20,29 @@ export default class ProviderContext<T> {
      * provider (both sync and async) are caught.
      */
     public setInterval(cb: () => any, time: number) {
-        setInterval(async () => {
+        const handler = async () => {
             try {
                 const result = cb();
                 result.then && await result;
             } catch (e) {
                 this.log(`Error thrown executing interval: ${e.message}`);
             }
-        }, time);
+        };
+
+        setInterval(handler, time);
+        handler(); // Run immediately as well.
+    }
+
+    /**
+     * Distributes the set of arguments over the specified update time, effectively calling
+     * setInterval but ensuring that they run distributed over the time period to decrease load.
+     */
+    public setDistributedInterval<T>(args: T[], handler: (args: T) => any, time: number) {
+        let offset = 0;
+        for (const arg of args) {
+            this.setInterval(() => handler(arg), time);
+            offset += time / args.length;
+        }
     }
 
     /**

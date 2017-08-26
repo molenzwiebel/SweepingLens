@@ -23,7 +23,7 @@ const LeagueOfLegendsWebsiteProvider: Provider<{}> = {
     description: "Tracks all posts on all regions of leagueoflegends.com.",
     icon: "https://i.imgur.com/aC7plOV.png",
     constructor(ctx) {
-        const buildLoader = (region: string, lang: string) => async () => {
+        const updateRegion = async ([region, lang]: [string, string]) => {
             const data = await parse(`https://${region}.leagueoflegends.com/${lang}/rss.xml`);
 
             for (const entry of data.entries) {
@@ -47,13 +47,7 @@ const LeagueOfLegendsWebsiteProvider: Provider<{}> = {
         };
 
         // Distribute regions over our update time so we don't suddenly burst with updates.
-        let offset = 0;
-        for (const [region, lang] of REGIONS) {
-            setTimeout(() => {
-                ctx.setInterval(buildLoader(region, lang), UPDATE_TIME);
-            }, offset);
-            offset += UPDATE_TIME / REGIONS.length;
-        }
+        ctx.setDistributedInterval(REGIONS, updateRegion, UPDATE_TIME);
     }
 };
 export default LeagueOfLegendsWebsiteProvider;

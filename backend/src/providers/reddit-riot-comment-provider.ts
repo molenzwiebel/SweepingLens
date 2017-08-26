@@ -47,7 +47,7 @@ const RedditRiotCommentProvider: Provider<{}> = {
                     }
                 });
             }
-        }, 1000);
+        }, 60 * 1000);
     }
 };
 export default RedditRiotCommentProvider;
