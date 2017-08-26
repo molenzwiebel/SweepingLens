@@ -46,7 +46,7 @@ const LeagueTwitterProvider: Provider<{}> = {
         let offset = 0;
         for (const account of ACCOUNTS) {
             setTimeout(() => {
-                setInterval(buildLoader(account), UPDATE_TIME);
+                ctx.setInterval(buildLoader(account), UPDATE_TIME);
             }, offset);
             offset += UPDATE_TIME / ACCOUNTS.length;
         }

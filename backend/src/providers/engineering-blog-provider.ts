@@ -10,7 +10,7 @@ const EngineeringBlogProvider: Provider<{}> = {
     description: "Tracks all articles posted on engineering.riotgames.com",
     icon: "https://engineering.riotgames.com/sites/all/themes/riot_games_engineering/images/icons/apple-icon-57x57.png",
     async constructor(ctx) {
-        setInterval(async () => {
+        ctx.setInterval(async () => {
             const data = await parse(`https://engineering.riotgames.com/rss.xml`);
 
             for (const entry of data.entries) {

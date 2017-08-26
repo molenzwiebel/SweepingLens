@@ -7,13 +7,16 @@ import fetch from "node-fetch";
 interface RedditCommentsJson {
     data: {
         children: {
-            id: string;
-            author: string;
-            author_flair_css_class?: string;
-            body: string;
-            link_title: string;
-            created_utc: number;
-            link_permalink: string;
+            kind: string;
+            data: {
+                id: string;
+                author: string;
+                author_flair_css_class?: string;
+                body: string;
+                link_title: string;
+                created_utc: number;
+                link_permalink: string;
+            };
         }[];
     }
 }
@@ -24,11 +27,11 @@ const RedditRiotCommentProvider: Provider<{}> = {
     description: "Aggregates all comments posted on Reddit by accounts with a Riot flair (confirmed Rioters). Limited to /r/leagueoflegends.",
     icon: "http://www.programwitherik.com/content/images/2016/07/reddit.png",
     constructor(ctx) {
-        setInterval(async () => {
+        ctx.setInterval(async () => {
             const req = await fetch("https://www.reddit.com/r/leagueoflegends/comments.json?limit=100");
             const data: RedditCommentsJson = await req.json();
 
-            for (const comment of data.data.children) {
+            for (const { data: comment } of data.data.children) {
                 if (!comment.author_flair_css_class || comment.author_flair_css_class.indexOf("riot") === -1) continue;
                 if (await ctx.hasEvent(comment.id)) continue;
 
@@ -44,7 +47,7 @@ const RedditRiotCommentProvider: Provider<{}> = {
                     }
                 });
             }
-        }, 2 * 60 * 1000);
+        }, 1000);
     }
 };
 export default RedditRiotCommentProvider;

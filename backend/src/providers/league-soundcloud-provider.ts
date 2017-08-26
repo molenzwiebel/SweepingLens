@@ -10,7 +10,7 @@ const LeagueSoundcloudProvider: Provider<{}> = {
     description: "Tracks all tracks posted on the official League of Legends Soundcloud.",
     icon: "https://cdn2.iconfinder.com/data/icons/social-icons-33/128/Soundcloud-128.png",
     async constructor(ctx) {
-        setInterval(async () => {
+        ctx.setInterval(async () => {
             const data = await parse(`http://feeds.soundcloud.com/users/soundcloud:users:20172471/sounds.rss`);
 
             for (const entry of data.entries) {

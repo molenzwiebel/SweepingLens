@@ -44,7 +44,7 @@ const BoardsRiotCommentProvider: Provider<{}> = {
         let offset = 0;
         for (const region of REGIONS) {
             setTimeout(() => {
-                setInterval(buildLoader(region), UPDATE_TIME);
+                ctx.setInterval(buildLoader(region), UPDATE_TIME);
             }, offset);
             offset += UPDATE_TIME / REGIONS.length;
         }

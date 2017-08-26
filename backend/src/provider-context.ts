@@ -16,17 +16,32 @@ export default class ProviderContext<T> {
     }
 
     /**
+     * Schedules a new interval for the current provider. This will ensure that errors from the
+     * provider (both sync and async) are caught.
+     */
+    public setInterval(cb: () => any, time: number) {
+        setInterval(async () => {
+            try {
+                const result = cb();
+                result.then && await result;
+            } catch (e) {
+                this.log(`Error thrown executing interval: ${e.message}`);
+            }
+        }, time);
+    }
+
+    /**
      * Displays a log to stdout for the current provider.
      */
     public log(...args: any[]) {
-        console.log(`[${this.provider.slug}]: `, ...args);
+        console.log(`[${new Date().toLocaleString()}] [${this.provider.slug}]: `, ...args);
     }
 
     /**
      * Acts as console.dir but prepends the current provider.
      */
     public dir(arg: any) {
-        console.log(`[${this.provider.slug}]:  <object>`);
+        console.log(`[${new Date().toLocaleString()}] [${this.provider.slug}]:  <object>`);
         console.dir(arg);
     }
 

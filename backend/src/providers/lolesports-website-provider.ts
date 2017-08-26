@@ -26,7 +26,7 @@ const LoLEsportsWebsiteProvider: Provider<{}> = {
     description: "Tracks all articles on the LoLEsports website.",
     icon: "https://lolstatic-a.akamaihd.net/frontpage/apps/prod/lolesports_feapp/en_US/cf9233664b96f1a3151ba473539405fb2f2b55b8/assets/img/site-logo-small.png",
     constructor(ctx) {
-        setInterval(async () => {
+        ctx.setInterval(async () => {
             const req = await fetch("http://api.lolesports.com/api/v1/marquees?locale=en_US");
             const data: MarqueeData = await req.json();
 

@@ -50,7 +50,7 @@ const LeagueOfLegendsWebsiteProvider: Provider<{}> = {
         let offset = 0;
         for (const [region, lang] of REGIONS) {
             setTimeout(() => {
-                setInterval(buildLoader(region, lang), UPDATE_TIME);
+                ctx.setInterval(buildLoader(region, lang), UPDATE_TIME);
             }, offset);
             offset += UPDATE_TIME / REGIONS.length;
         }

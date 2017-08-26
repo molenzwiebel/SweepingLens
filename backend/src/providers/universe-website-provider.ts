@@ -23,7 +23,7 @@ const UniverseWebsiteProvider: Provider<{}> = {
     description: "Tracks all latest entries on the League of Legends universe portal (universe.leagueoflegends.com).",
     icon: "https://i.imgur.com/aC7plOV.png",
     constructor(ctx) {
-        setInterval(async () => {
+        ctx.setInterval(async () => {
             const req = await fetch("http://universe-meeps.leagueoflegends.com/v1/en_us/explore/index.json");
             const data: UniverseMeeps = await req.json();
 

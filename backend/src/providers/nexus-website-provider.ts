@@ -24,7 +24,7 @@ const NexusWebsiteProvider: Provider<{}> = {
     description: "Tracks all articles on the League of Legends nexus (nexus.leagueoflegends.com).",
     icon: "https://i.imgur.com/aC7plOV.png",
     constructor(ctx) {
-        setInterval(async () => {
+        ctx.setInterval(async () => {
             const req = await fetch("http://nexus.leagueoflegends.com/feed/");
             const xml = await new Promise<any>((resolve, reject) => {
                 req.text().then(text => parseString(text, { explicitArray: false }, (err, res) => err ? reject(err) : resolve(res)));

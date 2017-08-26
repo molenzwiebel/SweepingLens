@@ -9,7 +9,7 @@ const LeagueInstagramProvider: Provider<{}> = {
     description: "Tracks all images posted on the official League of Legends Instagram accounts.",
     icon: "http://www.iconsalot.com/asset/icons/unknown/social-network-logo-collection/128/instagram.png",
     async constructor(ctx) {
-        setInterval(async () => {
+        ctx.setInterval(async () => {
             const data = await parse(`http://instatom.freelancis.net/leagueoflegends`);
 
             for (const entry of data.entries) {
