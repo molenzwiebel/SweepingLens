@@ -47,6 +47,11 @@ const UniverseWebsiteProvider: Provider<{}> = {
                 });
             }
         }, UPDATE_TIME);
-    }
+    },
+    options: [{
+        type: "chips",
+        title: "type",
+        filter: "value.map(x => x.toLowerCase()).indexOf(event.metadata.type.toLowerCase()) !== -1"
+    }]
 };
 export default UniverseWebsiteProvider;

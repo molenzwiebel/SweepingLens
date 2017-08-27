@@ -48,6 +48,11 @@ const NexusWebsiteProvider: Provider<{}> = {
                 });
             }
         }, UPDATE_TIME);
-    }
+    },
+    options: [{
+        type: "chips",
+        title: "Categories",
+        filter: "value.map(x => x.toLowerCase()).filter(v => event.metadata.categories.indexOf(v) !== -1).length > 0"
+    }]
 };
 export default NexusWebsiteProvider;

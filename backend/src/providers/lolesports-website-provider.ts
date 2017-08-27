@@ -47,6 +47,15 @@ const LoLEsportsWebsiteProvider: Provider<{}> = {
                 });
             }
         }, UPDATE_TIME);
-    }
+    },
+    options: [{
+        type: "chips",
+        title: "Region",
+        filter: "value.map(x => x.toLowerCase()).indexOf(event.metadata.region.toLowerCase()) !== -1"
+    }, {
+        type: "chips",
+        title: "Author",
+        filter: "value.map(x => x.toLowerCase()).indexOf(event.metadata.author.toLowerCase()) !== -1"
+    }]
 };
 export default LoLEsportsWebsiteProvider;

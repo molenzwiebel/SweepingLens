@@ -48,6 +48,11 @@ const LeagueTwitterProvider: Provider<{}> = {
         };
 
         ctx.setDistributedInterval(ACCOUNTS, updateAccount, UPDATE_TIME);
-    }
+    },
+    options: [{
+        type: "chips",
+        title: "Account",
+        filter: "value.map(x => x.toLowerCase()).indexOf(event.metadata.account.toLowerCase()) !== -1"
+    }]
 };
 export default LeagueTwitterProvider;

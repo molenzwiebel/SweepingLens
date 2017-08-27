@@ -55,6 +55,15 @@ const LeagueYoutubeProvider: Provider<{}> = {
         };
 
         ctx.setDistributedInterval(ACCOUNTS, buildLoader, UPDATE_TIME);
-    }
+    },
+    options: [{
+        type: "checkbox",
+        title: "English Only",
+        filter: "value ? event.metadata.english : true"
+    }, {
+        type: "chips",
+        title: "Accounts",
+        filter: "value.map(x => x.toLowerCase()).indexOf(event.metadata.author.toLowerCase()) !== -1"
+    }]
 };
 export default LeagueYoutubeProvider;

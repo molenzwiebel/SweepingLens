@@ -55,7 +55,7 @@ const RedditRiotCommentProvider: Provider<{}> = {
     },
     options: [{
         type: "chips",
-        title: "Poster Username",
+        title: "Author",
         filter: "value.map(x => x.toLowerCase()).indexOf(event.metadata.author.toLowerCase()) !== -1"
     }]
 };

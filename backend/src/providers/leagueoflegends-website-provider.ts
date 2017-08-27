@@ -48,6 +48,19 @@ const LeagueOfLegendsWebsiteProvider: Provider<{}> = {
 
         // Distribute regions over our update time so we don't suddenly burst with updates.
         ctx.setDistributedInterval(REGIONS, updateRegion, UPDATE_TIME);
-    }
+    },
+    options: [{
+        type: "chips",
+        title: "Languages",
+        filter: "value.map(x => x.toLowerCase()).indexOf(event.metadata.language.toLowerCase()) !== -1"
+    }, {
+        type: "chips",
+        title: "Authors",
+        filter: "value.map(x => x.toLowerCase()).indexOf(event.metadata.author.toLowerCase()) !== -1"
+    }, {
+        type: "chips",
+        title: "Regions",
+        filter: "value.map(x => x.toLowerCase()).indexOf(event.metadata.region.toLowerCase()) !== -1"
+    }]
 };
 export default LeagueOfLegendsWebsiteProvider;

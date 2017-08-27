@@ -30,6 +30,11 @@ const EngineeringBlogProvider: Provider<{}> = {
                 });
             }
         }, UPDATE_TIME);
-    }
+    },
+    options: [{
+        type: "chips",
+        title: "Authors",
+        filter: "value.map(x => x.toLowerCase()).indexOf(event.metadata.author.toLowerCase()) !== -1"
+    }]
 };
 export default EngineeringBlogProvider;
