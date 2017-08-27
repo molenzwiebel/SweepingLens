@@ -18,14 +18,17 @@ export default class App extends Vue {
     @mutation(RECEIVE_EVENT) emit: Mutations["RECEIVE_EVENT"];
 
     async mounted() {
-        const [providers, events] = await Promise.all([
+        const [providerReq, eventReq] = await Promise.all([
             fetch("http://localhost:8888/providers"),
             fetch("http://localhost:8888/events")
         ]);
 
+        const { events, total } = await eventReq.json();
+
         this.setData({
-            providers: await providers.json(),
-            events: await events.json(),
+            providers: await providerReq.json(),
+            totalEvents: total,
+            events
         });
 
         this.ws.onmessage = this.handleWebsocketMessage;

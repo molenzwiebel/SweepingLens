@@ -20,16 +20,30 @@ export default class Events extends Vue {
     @state loading: State["loading"];
     @state moreEvents: State["moreEvents"];
     @state providers: State["providers"];
+    @state events: State["events"];
     @getter filteredEvents: Getters["filteredEvents"];
     @action(LOAD_MORE) loadItems: Actions["LOAD_MORE"];
-
     private loadingMore = false;
+
+    mounted() {
+        // If the currently shown events change, check if we need to fetch more.
+        this.$watch("filteredEvents.length", () => {
+            console.log("Rerendering");
+            this.$emit("rerender");
+        });
+    }
 
     providerFor(event: Event): Provider {
         return this.providers.filter(x => x.id === event.provider)[0];
     }
 
+    get loadMoreDisabled() {
+        return this.loadingMore || !this.moreEvents;
+    }
+
     async loadMore() {
+        if (!this.events.length) return;
+
         this.loadingMore = true;
         await this.loadItems();
         this.loadingMore = false;

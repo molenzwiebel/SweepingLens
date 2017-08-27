@@ -89,6 +89,9 @@ export default class SweepingLens {
         if (maxId) builder.where("id", "<", maxId);
 
         const results = await builder.get();
-        res.json(results.map(x => x.serialize()));
+        res.json({
+            total: await DatabaseEvent.count(),
+            events: results.map(x => x.serialize())
+        });
     };
 }

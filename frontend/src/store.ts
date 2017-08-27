@@ -8,11 +8,14 @@ export const LOAD_MORE = "loadMore";
 export const SET_PROVIDERS_EVENTS = "setProvidersEvents";
 export const ADD_EVENTS = "addEvents";
 export const RECEIVE_EVENT = "receiveEvent";
+export const TOGGLE_PROVIDER_SHOWN = "toggleProviderShown";
 
 // ---------------- State ----------------
 export type State = {
     providers: Provider[],
     events: Event[],
+    totalEvents: number,
+    disabledProviders: string[],
     loading: boolean,
     moreEvents: boolean
 };
@@ -24,21 +27,23 @@ export type Getters = {
 
 const getters: Vuex.GetterTree<State, State> = {
     filteredEvents(state) {
-        return state.events;
+        return state.events.filter(x => state.disabledProviders.indexOf(x.provider) === -1);
     }
 };
 
 // ---------------- Mutations ----------------
 export type Mutations = {
-    SET_PROVIDERS_EVENTS({ providers, events }: { providers: Provider[], events: Event[] }): void;
+    SET_PROVIDERS_EVENTS({ providers, events, totalEvents }: { providers: Provider[], events: Event[], totalEvents: number }): void;
     ADD_EVENTS(events: Event[]): void;
     RECEIVE_EVENT(event: Event): void;
+    TOGGLE_PROVIDER_SHOWN(provider: Provider): void;
 };
 
 const mutations: Vuex.MutationTree<State> = {
-    [SET_PROVIDERS_EVENTS](state, { providers, events }: { providers: Provider[], events: Event[] }) {
+    [SET_PROVIDERS_EVENTS](state, { providers, events, totalEvents }: { providers: Provider[], events: Event[], totalEvents: number }) {
         state.providers = providers;
         state.events = events;
+        state.totalEvents = totalEvents;
         state.loading = false;
     },
     [ADD_EVENTS](state, events: Event[]) {
@@ -47,6 +52,15 @@ const mutations: Vuex.MutationTree<State> = {
     },
     [RECEIVE_EVENT](state, event: Event) {
         state.events.unshift(event);
+        state.totalEvents++;
+    },
+    [TOGGLE_PROVIDER_SHOWN](state, provider: Provider) {
+        const idx = state.disabledProviders.indexOf(provider.id);
+        if (idx !== -1) {
+            state.disabledProviders.splice(idx, 1);
+        } else {
+            state.disabledProviders.push(provider.id);
+        }
     }
 };
 
@@ -58,8 +72,8 @@ export type Actions = {
 const actions: Vuex.ActionTree<State, State> = {
     async [LOAD_MORE]({ state, commit }) {
         const req = await fetch("http://localhost:8888/events?max_id=" + state.events[state.events.length - 1].id);
-        const items = await req.json();
-        commit(ADD_EVENTS, items);
+        const items: { events: Event[] } = await req.json();
+        commit(ADD_EVENTS, items.events);
     }
 };
 
@@ -68,6 +82,8 @@ export default new Vuex.Store<State>({
     state: {
         providers: [],
         events: [],
+        totalEvents: 0,
+        disabledProviders: JSON.parse(localStorage.getItem("disabledProviders") || "[]"),
         loading: true,
         moreEvents: true
     },

@@ -10,6 +10,8 @@
             <div class="description">
                 <span>{{ provider.description }}</span>
             </div>
+
+            <md-checkbox :value="isShown" @change="toggle">Show</md-checkbox>
         </md-list-expand>
     </md-list-item>
 </template>
