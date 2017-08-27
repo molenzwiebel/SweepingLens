@@ -16,7 +16,7 @@
             </md-layout>
 
             <md-layout>
-                {{ loading }}
+                <events></events>
             </md-layout>
         </md-layout>
     </div>
