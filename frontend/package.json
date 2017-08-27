@@ -23,10 +23,15 @@
     "typescript": "^2.4.2",
     "vue": "^2.4.2",
     "vue-class-component": "^5.0.2",
+    "vue-infinite-scroll": "^2.0.1",
     "vue-loader": "^13.0.4",
     "vue-material": "^0.7.4",
     "vue-property-decorator": "^5.2.1",
     "vue-template-compiler": "^2.4.2",
+    "vue-timeago": "^3.3.6",
+    "vue2-animate": "^1.0.4",
+    "vuex": "^2.3.1",
+    "vuex-class": "^0.2.0",
     "webpack": "^3.5.5",
     "webpack-dev-server": "^2.7.1"
   }

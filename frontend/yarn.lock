@@ -3561,6 +3561,10 @@ vue-hot-reload-api@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.1.0.tgz#9ca58a6e0df9078554ce1708688b6578754d86de"
 
+vue-infinite-scroll:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/vue-infinite-scroll/-/vue-infinite-scroll-2.0.1.tgz#f418bd5cdca5e16837ce3b78333832288729e660"
+
 vue-loader:
   version "13.0.4"
   resolved "https://registry.yarnpkg.com/vue-loader/-/vue-loader-13.0.4.tgz#0a6d893698735fcf7037b20a23d724cb39eee7d4"
@@ -3609,6 +3613,22 @@ vue-template-compiler:
 vue-template-es2015-compiler@^1.5.3:
   version "1.5.3"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.5.3.tgz#22787de4e37ebd9339b74223bc467d1adee30545"
+
+vue-timeago:
+  version "3.3.6"
+  resolved "https://registry.yarnpkg.com/vue-timeago/-/vue-timeago-3.3.6.tgz#c849042ddaf159f24c80ac317211a0d4b427e5fc"
+
+vue2-animate:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/vue2-animate/-/vue2-animate-1.0.4.tgz#23fd1ee4ef2e25672f6a84a3363f306160f38032"
+
+vuex:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/vuex/-/vuex-2.3.1.tgz#cde8e997c1f9957719bc7dea154f9aa691d981a6"
+
+vuex-class:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/vuex-class/-/vuex-class-0.2.0.tgz#84fb2f34ddbf7384381576ed3222b3d2abad5649"
 
 watchpack@^1.4.0:
   version "1.4.0"

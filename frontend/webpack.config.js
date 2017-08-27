@@ -22,7 +22,7 @@ module.exports = function(env) {
                 loader: "vue-loader"
             }, {
                 test: /\.json$/,
-                loader: "file-loader"
+                loader: "json-loader"
             }, {
                 test: /\.png$/,
                 loader: "file-loader"
