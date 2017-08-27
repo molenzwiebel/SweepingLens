@@ -22,7 +22,7 @@ const NexusWebsiteProvider: Provider<{}> = {
     slug: "nexus-website",
     name: "League of Legends Nexus",
     description: "Tracks all articles on the League of Legends nexus (nexus.leagueoflegends.com).",
-    icon: "https://i.imgur.com/aC7plOV.png",
+    icon: "https://i.imgur.com/f4Kgttx.png",
     constructor(ctx) {
         ctx.setInterval(async () => {
             const req = await fetch("http://nexus.leagueoflegends.com/feed/");

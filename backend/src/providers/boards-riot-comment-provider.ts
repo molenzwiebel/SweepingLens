@@ -5,7 +5,8 @@ import slugify from "../util/slugify";
 const REGIONS = [
     "euw",
     "oce",
-    "na"
+    "na",
+    "pbe"
 ];
 
 const UPDATE_TIME = 60 * 1000; // once a minute
@@ -14,7 +15,7 @@ const BoardsRiotCommentProvider: Provider<{}> = {
     slug: "boards-riot-comment",
     name: "Boards Riot Comments",
     description: "Tracks all comments made by Rioters across all English boards.",
-    icon: "https://i.imgur.com/aC7plOV.png",
+    icon: "http://i.imgur.com/4W9CwjF.png",
     async constructor(ctx) {
         const updateRegion = async (region: string) => {
             const entries = await loadRedTracker(region);

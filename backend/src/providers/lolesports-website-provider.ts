@@ -22,7 +22,7 @@ const UPDATE_TIME = 60 * 1000; // once a minute
 
 const LoLEsportsWebsiteProvider: Provider<{}> = {
     slug: "lolesports-website",
-    name: "lolesports.com article",
+    name: "LoLEsports Website",
     description: "Tracks all articles on the LoLEsports website.",
     icon: "https://lolstatic-a.akamaihd.net/frontpage/apps/prod/lolesports_feapp/en_US/cf9233664b96f1a3151ba473539405fb2f2b55b8/assets/img/site-logo-small.png",
     constructor(ctx) {
