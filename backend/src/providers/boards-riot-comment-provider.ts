@@ -19,7 +19,7 @@ const BoardsRiotCommentProvider: Provider<{}> = {
         const updateRegion = async (region: string) => {
             const entries = await loadRedTracker(region);
 
-            for (const comment of entries) {
+            for (const comment of entries.reverse()) {
                 if (!comment.isComment) continue;
 
                 const id = slugify(comment.link);

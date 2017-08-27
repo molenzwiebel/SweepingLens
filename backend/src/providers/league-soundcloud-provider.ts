@@ -13,7 +13,7 @@ const LeagueSoundcloudProvider: Provider<{}> = {
         ctx.setInterval(async () => {
             const data = await parse(`http://feeds.soundcloud.com/users/soundcloud:users:20172471/sounds.rss`);
 
-            for (const entry of data.entries) {
+            for (const entry of data.entries.reverse()) {
                 const id = slugify(entry.title);
                 if (await ctx.hasEvent(id)) continue;
 

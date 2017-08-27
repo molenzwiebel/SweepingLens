@@ -20,7 +20,7 @@ const UPDATE_TIME = 60 * 1000; // once a minute
 
 const NexusWebsiteProvider: Provider<{}> = {
     slug: "nexus-website",
-    name: "nexus.leagueoflegends.com article",
+    name: "League of Legends Nexus",
     description: "Tracks all articles on the League of Legends nexus (nexus.leagueoflegends.com).",
     icon: "https://i.imgur.com/aC7plOV.png",
     constructor(ctx) {
@@ -30,7 +30,7 @@ const NexusWebsiteProvider: Provider<{}> = {
                 req.text().then(text => parseString(text, { explicitArray: false }, (err, res) => err ? reject(err) : resolve(res)));
             });
 
-            for (const item of xml.rss.channel.item as RSSItem[]) {
+            for (const item of xml.rss.channel.item.reverse() as RSSItem[]) {
                 const [, id] = /\?p=(\d+)/.exec(item.guid._)!;
                 if (await ctx.hasEvent(id)) continue;
 

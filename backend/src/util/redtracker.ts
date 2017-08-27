@@ -1,6 +1,7 @@
 import fetch from "node-fetch";
 import { load } from "cheerio";
 import marked = require("marked");
+import decode from "./decode";
 
 interface RedTrackerEntry {
     link: string;
@@ -23,7 +24,7 @@ export default async function loadRedTracker(region: string): Promise<RedTracker
         const title = $$.find(".title-link").text();
         const author = $$.find(".author a").text();
         const timestamp = new Date($$.find(".timeago").attr("title"));
-        const body = marked($$.find(".markdown_content").html() || "");
+        const body = marked(decode($$.find(".markdown_content").html() || ""));
         const isComment = $$.find(".content.parent").length > 0;
 
         entries.push({ link, title, author, timestamp, body, isComment });

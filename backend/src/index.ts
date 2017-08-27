@@ -18,17 +18,24 @@ process.on("unhandledRejection", (err: Error) => {
 });
 
 const lens = new SweepingLens();
-// lens.registerProvider(RedditRiotCommentProvider);
-// lens.registerProvider(LeagueOfLegendsWebsiteProvider);
-// lens.registerProvider(NexusWebsiteProvider);
-// lens.registerProvider(UniverseWebsiteProvider);
-// lens.registerProvider(LoLEsportsWebsiteProvider);
-// lens.registerProvider(LeagueTwitterProvider);
-// lens.registerProvider(LoLEsportsTwitterProvider);
-// lens.registerProvider(EngineeringBlogProvider);
-// lens.registerProvider(LeagueSoundcloudProvider);
-// lens.registerProvider(LeagueInstagramProvider);
-// lens.registerProvider(BoardsRiotCommentProvider);
-// lens.registerProvider(BoardsRiotPostProvider);
+
+lens.registerProvider(RedditRiotCommentProvider);
+
+lens.registerProvider(BoardsRiotPostProvider);
+lens.registerProvider(BoardsRiotCommentProvider);
+
+lens.registerProvider(LeagueOfLegendsWebsiteProvider);
+lens.registerProvider(NexusWebsiteProvider);
+lens.registerProvider(UniverseWebsiteProvider);
+
+lens.registerProvider(LeagueTwitterProvider);
+lens.registerProvider(LeagueSoundcloudProvider);
+lens.registerProvider(LeagueInstagramProvider);
 lens.registerProvider(LeagueYoutubeProvider);
+
+lens.registerProvider(LoLEsportsWebsiteProvider);
+lens.registerProvider(LoLEsportsTwitterProvider);
+
+lens.registerProvider(EngineeringBlogProvider);
+
 lens.startup(8888);

@@ -34,7 +34,7 @@ const LeagueYoutubeProvider: Provider<{}> = {
         const buildLoader = async ([name, account, english]: [string, string, boolean]) => {
             const data = await parse(`https://www.youtube.com/feeds/videos.xml?channel_id=${account}`);
 
-            for (const entry of data.entries) {
+            for (const entry of data.entries.reverse()) {
                 const [, id] = /\?v=(.*)$/.exec(entry.link)!;
                 if (await ctx.hasEvent(id)) continue;
 
@@ -42,7 +42,7 @@ const LeagueYoutubeProvider: Provider<{}> = {
                 ctx.emit({
                     id,
                     title: `[${name}] ${entry.title}`,
-                    body: `<iframe width="420" height="315" src="https://www.youtube.com/embed/${id}"></iframe>`,
+                    body: `<iframe width="560" height="315" src="https://www.youtube.com/embed/${id}" frameborder="0" allowfullscreen></iframe>`,
                     url: entry.link,
                     timestamp: new Date(entry.publishedDate),
                     metadata: {

@@ -1,5 +1,6 @@
 import { Provider } from "../provider";
 import { parse } from "feed-reader";
+import fetch from "node-fetch";
 
 const ACCOUNTS = [
     "lolesports"
@@ -16,15 +17,18 @@ const LoLEsportsTwitterProvider: Provider<{}> = {
         const updateAccount = async (account: string) => {
             const data = await parse(`https://twitrss.me/twitter_user_to_rss/?user=${account}`);
 
-            for (const entry of data.entries) {
+            for (const entry of data.entries.reverse()) {
                 const [, id] = /\/status\/(\d+)/.exec(entry.link)!;
                 if (await ctx.hasEvent(id)) continue;
+
+                const oembedReq = await fetch(`https://publish.twitter.com/oembed?url=${encodeURIComponent(entry.link)}`);
+                const oembed: { html: string } = await oembedReq.json();
 
                 ctx.log(`Found new Tweet from @${account}: ${entry.contentSnippet}`);
                 ctx.emit({
                     id,
                     title: `[@${account}] ${entry.title.replace(/\n/g, " ")}`,
-                    body: entry.content,
+                    body: oembed.html,
                     url: entry.link,
                     timestamp: new Date(entry.publishedDate),
                     metadata: {

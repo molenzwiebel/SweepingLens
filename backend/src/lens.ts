@@ -2,6 +2,7 @@ import { Database } from "sqlite3";
 import Basie from "basie";
 import http = require("http");
 import express = require("express");
+import cors = require("cors");
 import WebSocket = require("uws");
 import { Server as WebSocketServer } from "uws";
 import ProviderContext from "./provider-context";
@@ -27,6 +28,8 @@ export default class SweepingLens {
                 this.peers.splice(this.peers.indexOf(socket), 1);
             });
         });
+
+        this.app.use(cors());
 
         this.app.get("/providers", (req, res) => this.loadProviders(req, res));
         this.app.get("/events", (req, res) => this.loadEvents(req, res));
@@ -68,7 +71,8 @@ export default class SweepingLens {
             id: provider.slug,
             name: provider.name,
             description: provider.description,
-            icon: provider.icon
+            icon: provider.icon,
+            options: provider.options || []
         })));
     };
 

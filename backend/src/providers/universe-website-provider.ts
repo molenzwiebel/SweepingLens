@@ -19,7 +19,7 @@ const UPDATE_TIME = 60 * 1000; // once a minute
 
 const UniverseWebsiteProvider: Provider<{}> = {
     slug: "universe-website",
-    name: "universe.leagueoflegends.com entry",
+    name: "League of Legends Universe",
     description: "Tracks all latest entries on the League of Legends universe portal (universe.leagueoflegends.com).",
     icon: "https://i.imgur.com/aC7plOV.png",
     constructor(ctx) {
@@ -27,7 +27,7 @@ const UniverseWebsiteProvider: Provider<{}> = {
             const req = await fetch("http://universe-meeps.leagueoflegends.com/v1/en_us/explore/index.json");
             const data: UniverseMeeps = await req.json();
 
-            for (const module of data["latest-modules"]) {
+            for (const module of data["latest-modules"].reverse()) {
                 const id = slugify(module.title);
                 if (await ctx.hasEvent(id)) continue;
 

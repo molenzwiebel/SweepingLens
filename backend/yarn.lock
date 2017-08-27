@@ -4,7 +4,13 @@
   version "0.22.2"
   resolved "https://registry.yarnpkg.com/@types/cheerio/-/cheerio-0.22.2.tgz#539625874bc856086ad491c2fdc9b10c05ae308e"
 
-"@types/express":
+"@types/cors":
+  version "2.8.1"
+  resolved "https://registry.yarnpkg.com/@types/cors/-/cors-2.8.1.tgz#54073caf3b7a741e67fb82483f83a6cadfba7501"
+  dependencies:
+    "@types/express" "*"
+
+"@types/express", "@types/express@*":
   version "4.0.37"
   resolved "https://registry.yarnpkg.com/@types/express/-/express-4.0.37.tgz#625ac3765169676e01897ca47011c26375784971"
   dependencies:
@@ -16,6 +22,10 @@
   resolved "https://registry.yarnpkg.com/@types/express-serve-static-core/-/express-serve-static-core-4.0.50.tgz#c5a139b5d29d2305aae6d982f69cef36120beacf"
   dependencies:
     "@types/node" "*"
+
+"@types/html-entities":
+  version "1.2.16"
+  resolved "https://registry.yarnpkg.com/@types/html-entities/-/html-entities-1.2.16.tgz#4d1fe208c4c33727ac4657e6f5d92bfe52427023"
 
 "@types/marked":
   version "0.3.0"
@@ -264,6 +274,13 @@ cookie@0.3.1:
 core-util-is@~1.0.0, core-util-is@1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
+
+cors:
+  version "2.8.4"
+  resolved "https://registry.yarnpkg.com/cors/-/cors-2.8.4.tgz#2bd381f2eb201020105cd50ea59da63090694686"
+  dependencies:
+    object-assign "^4"
+    vary "^1"
 
 cryptiles@2.x.x:
   version "2.0.5"
@@ -561,7 +578,7 @@ hoek@2.x.x:
   version "2.16.3"
   resolved "https://registry.yarnpkg.com/hoek/-/hoek-2.16.3.tgz#20bb7403d3cea398e91dc4710a8ff1b8274a25ed"
 
-html-entities@1.x.x:
+html-entities, html-entities@1.x.x:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/html-entities/-/html-entities-1.2.1.tgz#0df29351f0721163515dfb9e5543e5f6eed5162f"
 
@@ -815,7 +832,7 @@ oauth-sign@~0.8.1:
   version "0.8.2"
   resolved "https://registry.yarnpkg.com/oauth-sign/-/oauth-sign-0.8.2.tgz#46a6ab7f0aead8deae9ec0565780b7d4efeb9d43"
 
-object-assign@^4.1.0:
+object-assign@^4, object-assign@^4.1.0:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
 
@@ -1159,7 +1176,7 @@ uws:
   version "8.14.1"
   resolved "https://registry.yarnpkg.com/uws/-/uws-8.14.1.tgz#de09619f305f6174d5516a9c6942cb120904b20b"
 
-vary@~1.1.1:
+vary@^1, vary@~1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.1.tgz#67535ebb694c1d52257457984665323f587e8d37"
 

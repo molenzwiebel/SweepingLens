@@ -30,7 +30,7 @@ const LoLEsportsWebsiteProvider: Provider<{}> = {
             const req = await fetch("http://api.lolesports.com/api/v1/marquees?locale=en_US");
             const data: MarqueeData = await req.json();
 
-            for (const article of data.articles) {
+            for (const article of data.articles.reverse()) {
                 if (await ctx.hasEvent(article.nid)) continue;
 
                 ctx.log("Found new lolesports featured article: " + article.title);

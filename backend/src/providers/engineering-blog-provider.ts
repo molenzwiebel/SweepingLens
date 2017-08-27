@@ -13,7 +13,7 @@ const EngineeringBlogProvider: Provider<{}> = {
         ctx.setInterval(async () => {
             const data = await parse(`https://engineering.riotgames.com/rss.xml`);
 
-            for (const entry of data.entries) {
+            for (const entry of data.entries.reverse()) {
                 const id = slugify(entry.title);
                 if (await ctx.hasEvent(id)) continue;
 
