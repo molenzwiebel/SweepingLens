@@ -32,12 +32,19 @@ export default class App extends Vue {
         });
 
         this.ws.onmessage = this.handleWebsocketMessage;
+
+        // Ask to display notifications.
+        if (Notification && (<any>Notification).permission !== "denied") {
+            Notification.requestPermission(state => {
+                console.log("Permission state changed to " + state);
+            });
+        }
     }
 
     private handleWebsocketMessage(event: MessageEvent) {
-        const { type, payload }: { type: string, payload: any } = JSON.parse(event.data);
+        const { type, data }: { type: string, data: any } = JSON.parse(event.data);
         if (type === "event") {
-            this.emit(payload);
+            this.emit(data);
         }
     }
 }

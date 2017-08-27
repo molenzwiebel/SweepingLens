@@ -11,7 +11,8 @@
                 <span>{{ provider.description }}</span>
             </div>
 
-            <md-checkbox :value="isShown" @change="toggle">Show</md-checkbox>
+            <md-checkbox :value="isShown" @change="toggleShown">Show</md-checkbox>
+            <md-checkbox :value="notificationsEnabled" @change="toggleNotifs">Notifications On New Events</md-checkbox>
         </md-list-expand>
     </md-list-item>
 </template>

@@ -11,14 +11,16 @@ export interface Event {
     metadata: object;
 }
 
+export interface ConfigOption {
+    type: "chips" | "checkbox";
+    title: string;
+    filter: string;
+}
+
 export interface Provider {
     id: string;
     name: string;
     description: string;
     icon: string;
-    options: {
-        type: "chips" | "checkbox";
-        title: string;
-        filter: string;
-    }[];
+    options: ConfigOption[];
 }

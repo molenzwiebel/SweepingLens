@@ -9,6 +9,7 @@ export const SET_PROVIDERS_EVENTS = "setProvidersEvents";
 export const ADD_EVENTS = "addEvents";
 export const RECEIVE_EVENT = "receiveEvent";
 export const TOGGLE_PROVIDER_SHOWN = "toggleProviderShown";
+export const TOGGLE_PROVIDER_NOTIFICATIONS = "toggleProviderNotifications";
 
 // ---------------- State ----------------
 export type State = {
@@ -16,6 +17,7 @@ export type State = {
     events: Event[],
     totalEvents: number,
     disabledProviders: string[],
+    notifications: string[],
     loading: boolean,
     moreEvents: boolean
 };
@@ -37,6 +39,7 @@ export type Mutations = {
     ADD_EVENTS(events: Event[]): void;
     RECEIVE_EVENT(event: Event): void;
     TOGGLE_PROVIDER_SHOWN(provider: Provider): void;
+    TOGGLE_PROVIDER_NOTIFICATIONS(provider: Provider): void;
 };
 
 const mutations: Vuex.MutationTree<State> = {
@@ -53,6 +56,15 @@ const mutations: Vuex.MutationTree<State> = {
     [RECEIVE_EVENT](state, event: Event) {
         state.events.unshift(event);
         state.totalEvents++;
+
+        if (state.notifications.indexOf(event.provider) !== -1 && Notification) {
+            const provider = state.providers.filter(x => x.id === event.provider)[0];
+            if (!provider) return;
+            new Notification("New Event - " + provider.name, <any>{
+                body: event.title,
+                requireInteraction: true
+            });
+        }
     },
     [TOGGLE_PROVIDER_SHOWN](state, provider: Provider) {
         const idx = state.disabledProviders.indexOf(provider.id);
@@ -61,6 +73,16 @@ const mutations: Vuex.MutationTree<State> = {
         } else {
             state.disabledProviders.push(provider.id);
         }
+        localStorage.setItem("disabledProviders", JSON.stringify(state.disabledProviders));
+    },
+    [TOGGLE_PROVIDER_NOTIFICATIONS](state, provider: Provider) {
+        const idx = state.notifications.indexOf(provider.id);
+        if (idx !== -1) {
+            state.notifications.splice(idx, 1);
+        } else {
+            state.notifications.push(provider.id);
+        }
+        localStorage.setItem("notifications", JSON.stringify(state.notifications));
     }
 };
 
@@ -84,6 +106,7 @@ export default new Vuex.Store<State>({
         events: [],
         totalEvents: 0,
         disabledProviders: JSON.parse(localStorage.getItem("disabledProviders") || "[]"),
+        notifications: JSON.parse(localStorage.getItem("notifications") || "[]"),
         loading: true,
         moreEvents: true
     },
