@@ -12,6 +12,7 @@ export interface Event {
 }
 
 export interface ConfigOption {
+    id: string;
     type: "chips" | "checkbox";
     title: string;
     filter: string;

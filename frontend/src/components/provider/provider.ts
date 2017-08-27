@@ -1,6 +1,8 @@
 import Vue from "vue";
 import Component from "vue-class-component";
+
 import { Provider } from "../../types";
+import ConfigOptionComponent from "../config-option/config-option.vue";
 
 import { State as state, Mutation as mutation } from "vuex-class";
 import { State, Mutations, TOGGLE_PROVIDER_SHOWN, TOGGLE_PROVIDER_NOTIFICATIONS } from "../../store";
@@ -8,6 +10,9 @@ import { State, Mutations, TOGGLE_PROVIDER_SHOWN, TOGGLE_PROVIDER_NOTIFICATIONS 
 @Component({
     props: {
         provider: Object
+    },
+    components: {
+        configOption: ConfigOptionComponent
     }
 })
 export default class ProviderComponent extends Vue {

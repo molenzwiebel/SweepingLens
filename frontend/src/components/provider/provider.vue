@@ -13,6 +13,11 @@
 
             <md-checkbox :value="isShown" @change="toggleShown">Show</md-checkbox>
             <md-checkbox :value="notificationsEnabled" @change="toggleNotifs">Notifications On New Events</md-checkbox>
+
+            <div v-if="provider.options.length > 0">
+                <div class="md-title">Filtering Options</div>
+                <config-option v-for="option in provider.options" :key="option.id" :option="option"></config-option>
+            </div>
         </md-list-expand>
     </md-list-item>
 </template>

@@ -9,6 +9,7 @@ import ProviderContext from "./provider-context";
 import { Provider } from "./provider";
 import { DatabaseEvent } from "./database";
 import { WSEvent } from "./ws-event";
+import slugify from "./util/slugify";
 
 export default class SweepingLens {
     private app = express();
@@ -72,7 +73,7 @@ export default class SweepingLens {
             name: provider.name,
             description: provider.description,
             icon: provider.icon,
-            options: provider.options || []
+            options: (provider.options || []).map(x => ({ ...x, id: provider.slug + "_" + slugify(x.title) }))
         })));
     };
 
