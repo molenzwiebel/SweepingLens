@@ -9,6 +9,7 @@ import ProviderContext from "./provider-context";
 import { Provider } from "./provider";
 import { DatabaseEvent } from "./database";
 import { WSEvent } from "./ws-event";
+import { join } from "path";
 import slugify from "./util/slugify";
 
 export default class SweepingLens {
@@ -31,6 +32,7 @@ export default class SweepingLens {
         });
 
         this.app.use(cors());
+        this.app.use(express.static(join(__dirname, "../../frontend/src")));
 
         this.app.get("/providers", (req, res) => this.loadProviders(req, res));
         this.app.get("/events", (req, res) => this.loadEvents(req, res));

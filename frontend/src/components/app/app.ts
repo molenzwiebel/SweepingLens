@@ -11,7 +11,7 @@ import { State, Mutations, SET_PROVIDERS_EVENTS, RECEIVE_EVENT } from "../../sto
     components: { Providers, Events }
 })
 export default class App extends Vue {
-    private ws = new WebSocket("ws://localhost:8888");
+    private ws = new WebSocket(`ws${location.protocol === "https" ? "s" : ""}://${location.hostname}`);
 
     @state loading: State["loading"];
     @mutation(SET_PROVIDERS_EVENTS) setData: Mutations["SET_PROVIDERS_EVENTS"];
@@ -19,8 +19,8 @@ export default class App extends Vue {
 
     async mounted() {
         const [providerReq, eventReq] = await Promise.all([
-            fetch("http://localhost:8888/providers"),
-            fetch("http://localhost:8888/events")
+            fetch("/providers"),
+            fetch("/events")
         ]);
 
         const { events, total } = await eventReq.json();

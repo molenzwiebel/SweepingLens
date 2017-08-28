@@ -115,7 +115,7 @@ export type Actions = {
 
 const actions: Vuex.ActionTree<State, State> = {
     async [LOAD_MORE]({ state, commit }) {
-        const req = await fetch("http://localhost:8888/events?max_id=" + state.events[state.events.length - 1].id);
+        const req = await fetch("/events?max_id=" + state.events[state.events.length - 1].id);
         const items: { events: Event[] } = await req.json();
         commit(ADD_EVENTS, items.events);
     }
