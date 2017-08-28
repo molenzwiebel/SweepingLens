@@ -11,7 +11,7 @@ import { State, Mutations, SET_PROVIDERS_EVENTS, RECEIVE_EVENT } from "../../sto
     components: { Providers, Events }
 })
 export default class App extends Vue {
-    private ws = new WebSocket(`ws${location.protocol === "https" ? "s" : ""}://${location.hostname}`);
+    private ws = new WebSocket(`ws${location.protocol === "https:" ? "s" : ""}://${location.hostname}`);
 
     @state loading: State["loading"];
     @mutation(SET_PROVIDERS_EVENTS) setData: Mutations["SET_PROVIDERS_EVENTS"];
