@@ -2,7 +2,7 @@
     <md-card class="card">
         <md-card-header>
             <div class="md-title">Data Sources</div>
-            <div class="md-subtitle">Showing {{ filteredEvents.length.toLocaleString() }} of {{ events.length.toLocaleString() }} ({{ totalEvents.toLocaleString() }} total)</div>
+            <div class="md-subtitle">Showing {{ filteredEvents.length.toLocaleString() }} of {{ events.length.toLocaleString() }} events ({{ totalEvents.toLocaleString() }} total)</div>
         </md-card-header>
 
         <md-card-content :class="loading && 'loading'">

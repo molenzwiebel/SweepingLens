@@ -63,7 +63,7 @@ const LeagueYoutubeProvider: Provider<{}> = {
     }, {
         type: "chips",
         title: "Accounts",
-        filter: "value.map(x => x.toLowerCase()).indexOf(event.metadata.author.toLowerCase()) !== -1"
+        filter: "value.map(x => x.toLowerCase()).indexOf(event.metadata.account.toLowerCase()) !== -1"
     }]
 };
 export default LeagueYoutubeProvider;

@@ -4,6 +4,14 @@ import VueMaterial = require("vue-material");
 import "vue-material/dist/vue-material.css";
 Vue.use(VueMaterial);
 
+(<any>Vue).material.registerTheme({
+    lens: {
+        primary: "blue",
+        accent: "pink"
+    }
+});
+(<any>Vue).material.setCurrentTheme("lens");
+
 import "vue2-animate/dist/vue2-animate.min.css";
 
 import VueTimeago = require("vue-timeago");
