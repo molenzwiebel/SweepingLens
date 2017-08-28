@@ -2,7 +2,7 @@ import { Provider } from "../provider";
 import { parse } from "feed-reader";
 import slugify from "../util/slugify";
 
-const UPDATE_TIME = 60 * 1000; // once a minute
+const UPDATE_TIME = 30 * 1000; // every 30 seconds
 
 const EngineeringBlogProvider: Provider<{}> = {
     slug: "engineering-blog",

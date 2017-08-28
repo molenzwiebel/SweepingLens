@@ -23,7 +23,7 @@ const ACCOUNTS: [string, string, boolean][] = [
     ["EU League Community", "UC4KvdihNRDcMx_yoaFE4tEg", true],
 ];
 
-const UPDATE_TIME = 60 * 1000; // once a minute
+const UPDATE_TIME = 30 * 1000; // every 30 seconds
 
 const LeagueYoutubeProvider: Provider<{}> = {
     slug: "league-youtube",

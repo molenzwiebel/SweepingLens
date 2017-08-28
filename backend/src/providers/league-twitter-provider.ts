@@ -15,7 +15,7 @@ const ACCOUNTS = [
     "lol_cis"
 ];
 
-const UPDATE_TIME = 60 * 1000; // once a minute
+const UPDATE_TIME = 30 * 1000; // every 30 seconds
 
 const LeagueTwitterProvider: Provider<{}> = {
     slug: "league-twitter",

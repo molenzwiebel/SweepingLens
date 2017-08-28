@@ -6,7 +6,7 @@ const ACCOUNTS = [
     "lolesports"
 ];
 
-const UPDATE_TIME = 60 * 1000; // once a minute
+const UPDATE_TIME = 30 * 1000; // every 30 seconds
 
 const LoLEsportsTwitterProvider: Provider<{}> = {
     slug: "lolesports-twitter",
