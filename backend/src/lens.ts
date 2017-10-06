@@ -36,6 +36,7 @@ export default class SweepingLens {
 
         this.app.get("/providers", (req, res) => this.loadProviders(req, res));
         this.app.get("/events", (req, res) => this.loadEvents(req, res));
+        this.app.get("/search", (req, res) => this.searchEvents(req.query.q, res));
     }
 
     /**
@@ -94,6 +95,21 @@ export default class SweepingLens {
         const results = await builder.get();
         res.json({
             total: await DatabaseEvent.count(),
+            events: results.map(x => x.serialize())
+        });
+    };
+
+    /**
+     * Handles the GET /search path that searches all events for the specified string.
+     */
+    private searchEvents = async (query: string, res: express.Response) => {
+        const results = await DatabaseEvent
+            .where("title", "LIKE", "%" + query + "%")
+            .orWhere("url", "LIKE", "%" + query + "%")
+            .orWhere("body", "LIKE", "%" + query + "%")
+            .get();
+        res.json({
+            total: results.length,
             events: results.map(x => x.serialize())
         });
     };
