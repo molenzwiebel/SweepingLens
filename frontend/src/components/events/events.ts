@@ -18,6 +18,7 @@ import { State, Actions, LOAD_MORE, Getters } from "../../store";
 })
 export default class Events extends Vue {
     @state loading: State["loading"];
+    @state loadingEvents: State["loadingEvents"];
     @state moreEvents: State["moreEvents"];
     @state providers: State["providers"];
     @state events: State["events"];

@@ -1,17 +1,17 @@
 <template>
     <div class="body"
-         :class="loading && 'loading'"
+         :class="(loading || loadingEvents) && 'loading'"
          v-infinite-scroll="loadMore"
          infinite-scroll-disabled="loadMoreDisabled"
          infinite-scroll-distance="200"
          infinite-scroll-listen-for-event="rerender">
 
-        <md-spinner v-if="loading" md-indeterminate></md-spinner>
+        <md-spinner v-if="(loading || loadingEvents)" md-indeterminate></md-spinner>
 
         <transition-group v-else name="fadeRight" tag="div">
             <event v-for="event in filteredEvents" :event="event" :provider="providerFor(event)" :key="event.id"></event>
         </transition-group>
-        <md-button v-if="!loading" class="md-raised md-primary" :disabled="loadMoreDisabled" @click="loadMore">{{ moreEvents ? "Load More" : "No More Events" }}</md-button>
+        <md-button v-if="!(loading || loadingEvents)" class="md-raised md-primary" :disabled="loadMoreDisabled" @click="loadMore">{{ moreEvents ? "Load More" : "No More Events" }}</md-button>
     </div>
 </template>
 

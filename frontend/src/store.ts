@@ -11,19 +11,27 @@ export const RECEIVE_EVENT = "receiveEvent";
 export const TOGGLE_PROVIDER_SHOWN = "toggleProviderShown";
 export const TOGGLE_PROVIDER_NOTIFICATIONS = "toggleProviderNotifications";
 export const SET_CONFIG_OPTION_VALUE = "setConfigOptionValue";
+export const SET_SEARCH_RESULTS = "setSearchResults";
+export const SET_SEARCH_QUERY = "setSearchQuery";
+export const START_SEARCH = "startSearch";
+export const SEARCH = "search";
 
 // ---------------- State ----------------
 export type State = {
     providers: Provider[],
-    events: Event[],
 
+    events: Event[],
     totalEvents: number,
+
+    searchQuery: string,
+    searchResults: Event[],
 
     disabledProviders: string[],
     notifications: string[],
     configValues: { [key: string]: any };
 
     loading: boolean,
+    loadingEvents: boolean,
     moreEvents: boolean
 };
 
@@ -34,7 +42,12 @@ export type Getters = {
 
 const getters: Vuex.GetterTree<State, State> = {
     filteredEvents(state) {
-        return state.events.filter(event => {
+        // If we have a search query and finished loading it, render the results of the search instead.
+        const events = (state.searchQuery && !state.loadingEvents && state.searchResults.length)
+            ? state.searchResults
+            : state.events;
+
+        return events.filter(event => {
             if (state.disabledProviders.indexOf(event.provider) !== -1) return false;
 
             const provider = state.providers.filter(x => x.id === event.provider)[0];
@@ -58,6 +71,9 @@ export type Mutations = {
     TOGGLE_PROVIDER_SHOWN(provider: Provider): void;
     TOGGLE_PROVIDER_NOTIFICATIONS(provider: Provider): void;
     SET_CONFIG_OPTION_VALUE({ option, value }: { option: ConfigOption, value: any }): void;
+    SET_SEARCH_QUERY(query: string): void;
+    START_SEARCH(): void;
+    SET_SEARCH_RESULTS(results: Event[]): void;
 };
 
 const mutations: Vuex.MutationTree<State> = {
@@ -105,12 +121,23 @@ const mutations: Vuex.MutationTree<State> = {
     [SET_CONFIG_OPTION_VALUE](state, { option, value }: { option: ConfigOption, value: any }) {
         state.configValues[option.id] = value;
         localStorage.setItem("configValues", JSON.stringify(state.configValues));
+    },
+    [SET_SEARCH_QUERY](state, query: string) {
+        state.searchQuery = query;
+    },
+    [START_SEARCH](state) {
+        state.loadingEvents = true;
+    },
+    [SET_SEARCH_RESULTS](state, results: Event[]) {
+        state.loadingEvents = false;
+        state.searchResults = results;
     }
 };
 
 // ---------------- Actions ----------------
 export type Actions = {
     LOAD_MORE(): Promise<void>;
+    SEARCH(): Promise<void>;
 };
 
 const actions: Vuex.ActionTree<State, State> = {
@@ -118,6 +145,15 @@ const actions: Vuex.ActionTree<State, State> = {
         const req = await fetch("/events?max_id=" + state.events[state.events.length - 1].id);
         const items: { events: Event[] } = await req.json();
         commit(ADD_EVENTS, items.events);
+    },
+    async [SEARCH]({ state, commit }) {
+        if (!state.searchQuery || state.loadingEvents) return;
+        commit(START_SEARCH);
+
+        const req = await fetch("/search?q=" + encodeURIComponent(state.searchQuery));
+        const items: { events: Event[] } = await req.json();
+
+        commit(SET_SEARCH_RESULTS, items.events);
     }
 };
 
@@ -125,15 +161,19 @@ const actions: Vuex.ActionTree<State, State> = {
 export default new Vuex.Store<State>({
     state: {
         providers: [],
-        events: [],
 
+        events: [],
         totalEvents: 0,
+
+        searchQuery: "",
+        searchResults: [],
 
         disabledProviders: JSON.parse(localStorage.getItem("disabledProviders") || "[]"),
         notifications: JSON.parse(localStorage.getItem("notifications") || "[]"),
         configValues: JSON.parse(localStorage.getItem("configValues") || "{}"),
 
         loading: true,
+        loadingEvents: false,
         moreEvents: true
     },
     getters,
