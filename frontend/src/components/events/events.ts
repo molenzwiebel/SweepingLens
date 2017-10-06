@@ -39,7 +39,7 @@ export default class Events extends Vue {
     }
 
     get loadMoreDisabled() {
-        return this.loadingMore || !this.moreEvents;
+        return this.loadingMore || this.loadingEvents || !this.moreEvents;
     }
 
     async loadMore() {
