@@ -12,6 +12,7 @@ import LeagueInstagramProvider from "./providers/league-instagram-provider";
 import BoardsRiotCommentProvider from "./providers/boards-riot-comment-provider";
 import BoardsRiotPostProvider from "./providers/boards-riot-post-provider";
 import LeagueYoutubeProvider from "./providers/league-youtube-provider";
+import LeagueFacebookProvider from "./providers/league-facebook-provider";
 
 process.on("unhandledRejection", (err: Error) => {
     console.error("Unhandled rejection: ", err);
@@ -32,6 +33,7 @@ lens.registerProvider(LeagueTwitterProvider);
 lens.registerProvider(LeagueSoundcloudProvider);
 lens.registerProvider(LeagueInstagramProvider);
 lens.registerProvider(LeagueYoutubeProvider);
+lens.registerProvider(LeagueFacebookProvider);
 
 lens.registerProvider(LoLEsportsWebsiteProvider);
 lens.registerProvider(LoLEsportsTwitterProvider);
