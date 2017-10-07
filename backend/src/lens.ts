@@ -107,6 +107,7 @@ export default class SweepingLens {
             .where("title", "LIKE", "%" + query + "%")
             .orWhere("url", "LIKE", "%" + query + "%")
             .orWhere("body", "LIKE", "%" + query + "%")
+            .orderByDesc("id")
             .get();
         res.json({
             total: results.length,
